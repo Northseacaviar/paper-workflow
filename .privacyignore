@@ -1,0 +1,28 @@
+# 会议官方 LaTeX 模板自带原作者邮箱，Clawic 的 skill 自带推广链接。
+conference-paper-writing/templates/
+chinese/
+
+# 这些 md 里的 ".claude/" 是安装路径说明，属预期。
+citation-verifier/SKILL.md
+draft-marker-discipline/SKILL.md
+paper-bootstrap/SKILL.md
+paper-reviewer/SKILL.md
+scientific-prose-style/references/ai-tells.md
+scientific-writing/SKILL.md
+submission-audit/SKILL.md
+academic-humanizer/README.md
+README.md
+.privacyignore
+
+# process_narration 规则把 markdown 加粗 "**" 当成过程叙述，属误报。
+empirical-manuscript-diagnosis/SKILL.md
+paper-analyzer/SKILL.md
+
+# 期刊官方投稿邮箱（djgl@...），公开信息。
+journal-selection-for-submission/references/cn-econ-journal-hard-data.md
+
+# secret_assign 命中的是变量名本身：api_key 形参、PDF 解析里的 token 局部变量。
+# 逐处人工核过，无凭据值；这三个文件不会写入任何 key。
+conference-paper-writing/references/citation-workflow.md
+nature-figure/scripts/audit_pdf_text.py
+nature-figure/scripts/validate_figure.py
