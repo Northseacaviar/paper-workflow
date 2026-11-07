@@ -1,6 +1,6 @@
 # paper-workflow
 
-论文从选题到投稿的 Agent skill 集合，39 个，一个目录一个 skill。纯 markdown 加 Python 标准库，拷进 skills 目录即可用。
+论文从选题到投稿的 Agent skill 集合，40 个，一个目录一个 skill。纯 markdown 加 Python 标准库，拷进 skills 目录即可用。
 
 按一次投稿的先后分四组。组内 skill 可以单独用，也可以让 `paper-workflow` 路由。
 
@@ -29,7 +29,7 @@
 | [conference-paper-writing](conference-paper-writing/) | 会议稿优先（NeurIPS/ICML/ICLR/ACL/AAAI/COLM），附模板 |
 | [chinese](chinese/) | 让中文读起来像母语写的，正式与口语、大陆与台湾 |
 
-## 三、审查与核验（14）
+## 三、审查与核验（15）
 
 | skill | 用途 |
 |---|---|
@@ -42,6 +42,7 @@
 | [results-analysis](results-analysis/) | 把模型评估输出变成可辩护的图表与结论 |
 | [results-section-revision](results-section-revision/) | Results 小节：图和主张已定，改小节流与论述推进 |
 | [ai-draft-quality-screen](ai-draft-quality-screen/) | 判断这篇 AI 草稿到底有没有说东西 |
+| [opinionated-review](opinionated-review/) | 非正式的第一反应：给立场、留靶子、只评不写，三个节点各一次 |
 | [aigc-detection-reverse-engineering](aigc-detection-reverse-engineering/) | 有 AIGC 检测报告时：反推它按什么打分，再决定改哪里 |
 | [empirical-manuscript-diagnosis](empirical-manuscript-diagnosis/) | 实证稿能投哪一档、投稿前改什么 |
 | [rebuttal-response](rebuttal-response/) | 审稿意见答复：逐条回应、改写稿定位 |

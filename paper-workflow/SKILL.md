@@ -284,7 +284,10 @@ Run step 7 before step 10, never after.
 - `conference-paper-writing` only when a conference venue is explicitly named. Optional set,
   installed with `--set all`.
 - `paper-reviewer` when the question is what the reviewer asked or whether the reviewer would accept
-  the answer. `rebuttal-response` when the question is what the authors may claim and how the letter,
+  the answer. `opinionated-review` when the author wants a candid first reaction for themselves
+  rather than a document that could go to an editor: one stance, a falsification condition for each
+  judgement, and no rewriting. The two can disagree, and the disagreement is the useful part.
+  `rebuttal-response` when the question is what the authors may claim and how the letter,
   manuscript, and Supplementary Information stay consistent. They stack, in that order, and
   `paper-reviewer` runs a second time at the end to grade the draft. `rebuttal-response` is in the
   recommended set; `paper-reviewer` is in the recommended set. A manuscript
