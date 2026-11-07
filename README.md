@@ -1,6 +1,6 @@
 # paper-workflow
 
-论文从选题到投稿的 Agent skill 集合，38 个，一个目录一个 skill。纯 markdown 加 Python 标准库，拷进 skills 目录即可用。
+论文从选题到投稿的 Agent skill 集合，39 个，一个目录一个 skill。纯 markdown 加 Python 标准库，拷进 skills 目录即可用。
 
 按一次投稿的先后分四组。组内 skill 可以单独用，也可以让 `paper-workflow` 路由。
 
@@ -29,7 +29,7 @@
 | [conference-paper-writing](conference-paper-writing/) | 会议稿优先（NeurIPS/ICML/ICLR/ACL/AAAI/COLM），附模板 |
 | [chinese](chinese/) | 让中文读起来像母语写的，正式与口语、大陆与台湾 |
 
-## 三、审查与核验（13）
+## 三、审查与核验（14）
 
 | skill | 用途 |
 |---|---|
@@ -42,6 +42,7 @@
 | [results-analysis](results-analysis/) | 把模型评估输出变成可辩护的图表与结论 |
 | [results-section-revision](results-section-revision/) | Results 小节：图和主张已定，改小节流与论述推进 |
 | [ai-draft-quality-screen](ai-draft-quality-screen/) | 判断这篇 AI 草稿到底有没有说东西 |
+| [aigc-detection-reverse-engineering](aigc-detection-reverse-engineering/) | 有 AIGC 检测报告时：反推它按什么打分，再决定改哪里 |
 | [empirical-manuscript-diagnosis](empirical-manuscript-diagnosis/) | 实证稿能投哪一档、投稿前改什么 |
 | [rebuttal-response](rebuttal-response/) | 审稿意见答复：逐条回应、改写稿定位 |
 | [paper-reviewer](paper-reviewer/) | 站审稿人一侧：写审稿报告、清点诉求、给答复打分 |
@@ -69,6 +70,7 @@
 - 疑心引文是编的：`reference-audit-guide` 先实查，`citation-verifier` 再查格式。
 - 要出图：`figure-planner` 定主张与面板，`nature-figure` 出图，`figure-style` 收可读性。
 - 被拒了要答复：`rebuttal-response` 写，`paper-reviewer` 反过来挑刺。
+- 被 AIGC 检测判红、想知道到底为什么：`aigc-detection-reverse-engineering` 先反推判定逻辑，别先改句子。
 
 ## 安装
 
@@ -82,7 +84,7 @@ cp -r paper-workflow/{paper-workflow,manuscript-optimizer} ~/.hermes/skills/
 - Hermes：`~/.hermes/skills/<skill>/`（或你配置的 skills 目录）
 - Claude Code：`<project>/.claude/skills/<skill>/`
 
-脚本只依赖 Python 3 标准库，无第三方包。
+脚本只依赖 Python 3 标准库，无第三方包；例外是 `aigc-detection-reverse-engineering` 的标色重建要 `pip install pymupdf`。
 
 ## 上游参考
 
