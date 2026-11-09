@@ -275,6 +275,10 @@ Run step 7 before step 10, never after.
   fabricated citation carrying a well-formed DOI.
 - `review-article-architecture` for a Review, survey, or Perspective, or whenever a piece written
   across many sessions may no longer match its brief. `manuscript-optimizer` for research articles.
+- `paper-bootstrap` for the project skeleton, then `reproducible-data` to set the data
+  discipline before the first regression: three layers (raw / interim / final), fetch records,
+  a manifest of hashes and row counts, and a rebuild test from raw. `paper-topic-screening`
+  when the question is still whether the topic can be done at all.
 - `draft-marker-discipline` before a batch pass over open markers, before quoting a manuscript's
   length, before removing superseded material, and before scripting the same edit across many files.
 - `figure-planner` to decide what each figure argues, then `nature-figure` to render it, then

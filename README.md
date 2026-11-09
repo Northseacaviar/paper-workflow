@@ -1,15 +1,16 @@
 # paper-workflow
 
-论文从选题到投稿的 Agent skill 集合，40 个，一个目录一个 skill。纯 markdown 加 Python 标准库，拷进 skills 目录即可用。
+论文从选题到投稿的 Agent skill 集合，41 个，一个目录一个 skill。纯 markdown 加 Python 标准库，拷进 skills 目录即可用。
 
 按一次投稿的先后分四组。组内 skill 可以单独用，也可以让 `paper-workflow` 路由。
 
-## 一、流程骨架（6）
+## 一、流程骨架（7）
 
 | skill | 用途 |
 |---|---|
 | [paper-workflow](paper-workflow/) | 总入口：先认文章类型与改动范围，再路由到具体 skill |
 | [paper-bootstrap](paper-bootstrap/) | 开新稿或整理旧目录：标准结构、活动源文件、项目记忆、目标期刊默认值 |
+| [reproducible-data](reproducible-data/) | 三层数据留痕（raw/interim/final）：拉取记录、清洗链、manifest 校验、从零重建 |
 | [paper-topic-screening](paper-topic-screening/) | 选题能不能做：先查撞车，再验数据，最后小样本试跑 |
 | [manuscript-optimizer](manuscript-optimizer/) | 稿子的问题可能不在句子：重排主张层级与证据链 |
 | [draft-marker-discipline](draft-marker-discipline/) | 跨多轮写作时用源内标记跟踪未决问题，按后果排序 |
