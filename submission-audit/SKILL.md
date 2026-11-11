@@ -107,6 +107,7 @@ Do not use this skill for:
 - Could a scientist outside the subfield say, from the title and abstract alone, what problem was addressed, what was found and why it matters?
 - If the target is `Nature Portfolio`, are the reporting-summary inputs, data/code statements, image-integrity materials, and disclosure items actually ready rather than merely planned?
 - If a submission form or portal draft already exists, do the title, abstract, keywords, availability statements, and related metadata still match the manuscript exactly?
+- **引用对账跑过没有**：`citation-verifier/scripts/cite_check.py 稿件.md` 的两栏（正文引了但列表没有 / 列表有但正文没引）是否都清空？没跑过或没清空，本次审计直接判 BLOCK，不进入下一项。中文作者-年份制也要跑，别因为"我引用都记得"跳过。
 - Has the paper been pressure-tested against the main rejection dimensions: insufficient contribution, weak clarity, weak empirical effect, incomplete evaluation, and questionable design?
 
 For a supplied LaTeX manuscript with typesetting in scope, use `scientific-writing`'s
@@ -117,11 +118,41 @@ not a blanket requirement to number every display. Apply template, venue and pro
 placement rules to the relevant deliverable; separate figure legends or a genuinely long table
 can be intentional. If compilation or visual inspection is unavailable, identify it as unchecked.
 
+## 机器预检（先跑，再人审）
+
+```bash
+python scripts/preflight.py 稿件.md --output audit-preflight.md
+```
+
+五项确定性检查，不调用模型，直接给裁决：
+
+| 项 | 判据 | 对应裁决 |
+|---|---|---|
+| 引用对账 | 调 `citation-verifier/scripts/cite_check.py`，只认「需补或删」「正文完全未提及」两类 | 有缺引 → BLOCK；只有待确认 → PASS |
+| 图表编号 | 正文引用「表 N/图 N」是否都有题注（兼容 `**表1　…**` 这类写法） | 缺题注 → WARN |
+| 占位符 | TODO/TBD/XXX/待补/待核/FIXME | 有 → WARN |
+| 摘要数字 | 摘要里的数字（≥2 位）是否在正文出现 | 缺 → WARN（防摘要与正文脱节） |
+| 段落重复 | ≥200 字整段完全重复 | 有 → BLOCK |
+
+退码 0/1/2 对应 PASS/WARN/BLOCK，可以直接串进 CI 或投稿脚本。人审从这份报告往下接，不要重复做这五项。
+
+## Verdict（先给裁决，再给条目）
+
+审计的产出不是一个清单，是一个能挡住提交的裁决。**先判，再解释。**
+
+| 裁决 | 判据 | 后果 |
+|---|---|---|
+| **BLOCK** | 存在会改变结论真值的问题：数字对不上、样本口径不一致、引用对账未清、稳健性把主结果翻掉而未说明、图表与正文矛盾 | 不许提交；修完重跑整份审计 |
+| **WARN** | 不影响结论真值但会被审稿人抓的：表述强于证据、文献与论证错位、术语不统一、格式与目标刊不符 | 可以提交，但必须在 cover letter 或正文里处理或明示 |
+| **PASS** | 上述均无 | 记录版本号与审计时间，出 `audit-YYYYMMDD.md` 存档 |
+
+裁决只能用这三个词，不要写"基本通过""总体良好"。每个 BLOCK 项必须写清：在哪、错成什么、改成什么、由谁改。
+
 ## Finding Format
 
 Report findings in this order:
-- High: submission-blocking or claim-distorting issues
-- Medium: credibility or reader-friction issues
+- High: submission-blocking or claim-distorting issues（一律对应 BLOCK）
+- Medium: credibility or reader-friction issues（一律对应 WARN）
 - Low: consistency and polish issues
 
 Each finding should include:

@@ -112,3 +112,26 @@ When using this skill, report:
 - suspicious metadata fields that need manual correction
 - claims that still need source verification
 - the minimum safe next step before submission
+
+## 中文/英文混排稿件的对账脚本（`scripts/cite_check.py`）
+
+面向 .md 稿件的实测脚本，补上前面几个脚本只吃 .bib/.tex 的缺口。两件事：
+
+1. **双向对账（离线）**：把「## 参考文献」小节切出来，其余当正文；正文抓两种引用写法——中文「魏志华、李茂良，2014」「李常青等（2010）」、英文「MacKinlay，1997」「Barberis & Shleifer（2003）」——与文献条目互查，输出「正文引了但列表没有」「列表有但正文没引」两栏。
+2. **Crossref 元数据核验（可选 `--crossref`）**：对英文条目按作者姓+年份+题名做检索，比对年份、卷、期、页码，给出 ✓ / ✗（附正确值）。
+
+```bash
+python cite_check.py 稿件.md                        # 只对账
+python cite_check.py 稿件.md --crossref --output 报告.md
+```
+
+退出码：0 全通过，1 有问题，2 输入错误——可以直接挂在投稿前的门禁里。
+
+**实测记录与已知局限**（2026-11，国九条稿 21 条文献、14 组引用）：
+
+- 注入式验证通过：正文改成「（MacKinlay，1999）」「（Fake，2099）」后，两条都被抓出；干净稿的两栏均为空。
+- **多作者英文引用会出假阳性**：`Barberis、Shleifer，2003` 这种中文式多人并列，第二、三作者会被当成独立引用报出来（Shleifer、Vishny、Modigliani）。报告里这类要人眼扫一遍，别直接按它删引用。
+- 中文机构作者（中国证监会/上海证券交易所）在正文常写作简称，会落在「正文未见引用」栏，属于命名差异，不是漏引。
+- 只适用于「作者-年份」制；数字脚注制（如 Chicago note style）需要另行改写解析。
+
+**在流程里的位置**：这个脚本属于第 1 步（书目形态与引证一致性），不判断文献是否存在、更不判断文献是否支持你的句子——那两步仍是 `reference-audit-guide` 与 `claim-source-verification`。
